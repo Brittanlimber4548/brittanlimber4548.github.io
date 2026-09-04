@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gemray-web</title>
+    <!--
+      No CSS/JS of this page's own beyond this reset: Slint's `renderer-femtovg`
+      backend creates its own `<canvas>` and drives everything inside it. `trunk`
+      rewrites the `data-trunk` link below into a `<script type="module">` that loads
+      the built `.wasm`/`.js` pair and runs `gemray-web`'s `#[wasm_bindgen(start)]`
+      entry point automatically -- no inline script of this crate's own is needed to
+      kick it off.
+    -->
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+        background: #1b1b1f;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  <link rel="modulepreload" href="/gemray/gemray-web-6ceb840bad4799f.js" crossorigin="anonymous" integrity="sha384-5EAxhEjgNUoua1dziWaMFpP656iwKs2gw2bXLfYX90kjYM12xZkB+Z5Q4J9VFpxl"><link rel="preload" href="/gemray/gemray-web-6ceb840bad4799f_bg.wasm" crossorigin="anonymous" integrity="sha384-u6PsK1sdL8EPM4PNCviwmtfKgO8l93f+kS0bq+h589LoRriVPOBjs6Uz3boodcrb" as="fetch" type="application/wasm"></head>
+  <body>
+    
+<script type="module">
+import init, * as bindings from '/gemray/gemray-web-6ceb840bad4799f.js';
+const wasm = await init({ module_or_path: '/gemray/gemray-web-6ceb840bad4799f_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+  </body>
+</html>
